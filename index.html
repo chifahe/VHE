@@ -13,92 +13,14 @@
                 height: 100%;
                 width: 100%;
             }
-            #sidebar {
-                position: absolute;
-                height: 0;
-                width: 0;
-            }
-            .test {
-                position: absolute;
-                background-color: wheat;
-                z-index: 999;
-            }
         </style>
     </head>
     <body>
-        <!-- This is where we check all elements. -->
-        <div id="sidebar"></div>
-        <!-- This is where we drag squares. -->
-        <div id="editor" onclick="AddDragEvent(this)"></div>
+        <!-- UNDONE: We don't need sidebar for now. -->
+        <!-- This is where we draw squares. -->
+        <div id="editor"></div>
         <script>
-            // global variables
-
-            var selected_object; // selected div
-
-            // Get the start and end coordinates of mouse drag.
-            var start_point_x = null,
-                start_point_y = null,
-                end_point_x = null,
-                end_point_y = null;
-
-            // functions
-
-            function AddDragEvent(object) {
-                if (selected_object == object) return; // If it is already selected, then do nothing.
-
-                selected_object = object;
-                console.log(selected_object);
-
-                // Add mousedown listener.
-                selected_object.onmousedown = function (event) {
-                    var event = event || window.event;
-                    start_point_x = event.offsetX;
-                    start_point_y = event.offsetY;
-
-                    document.onmousemove = function (event) {
-                        var event = event || window.event;
-                        end_point_x = event.offsetX;
-                        end_point_y = event.offsetY;
-                        // console.log("Start point: " + start_point_x + " , " + start_point_y + " and end point: " + end_point_x + " , " + end_point_y);
-                    };
-                };
-            }
-
-            // Create a div according to the coordinates after dragging.
-            var div_num = 0; // Number of divs created.
-            document.onmouseup = function () {
-                document.onmousemove = function () {}; // Remove mousedown listener.
-
-                if (start_point_x != null && start_point_y != null && end_point_x != null && end_point_y != null && start_point_x != end_point_x && start_point_y != end_point_y) {
-                    console.log("Start point: " + start_point_x + " , " + start_point_y + " and end point: " + end_point_x + " , " + end_point_y);
-
-                    if (start_point_x > end_point_x) {
-                        var temp = start_point_x;
-                        start_point_x = end_point_x;
-                        end_point_x = temp;
-                    }
-                    if (start_point_y > end_point_y) {
-                        var temp = start_point_y;
-                        start_point_y = end_point_y;
-                        end_point_y = temp;
-                    }
-
-                    var div_left = start_point_x;
-                    var div_top = start_point_y;
-                    var div_width = end_point_x - start_point_x;
-                    var div_height = end_point_y - start_point_y;
-
-                    div_num++;
-                    var add_content = "<div id='" + div_num + "' class='test' style='left:" + div_left + "px;top:" + div_top + "px;width:" + div_width + "px;height:" + div_height + "px;' onclick='AddDragEvent(this)'></div>";
-                    selected_object.insertAdjacentHTML("beforeend", add_content);
-                    console.log("We have " + div_num + " divs now");
-
-                    start_point_x = null;
-                    start_point_y = null;
-                    end_point_x = null;
-                    end_point_y = null;
-                }
-            };
+            // UNDONE: I'm thinking for a better solution.
         </script>
     </body>
 </html>
